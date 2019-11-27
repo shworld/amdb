@@ -1,0 +1,22 @@
+---
+- hosts: "{{ip}}"
+  tasks:
+    #获取硬信息
+    - name: get hardware
+      setup:
+       gather_subset: "!all,hardware,network"  #过滤查询选项
+      register: result
+    - name: echo hardware
+      debug:                           #({__amdb_delimited})定界符,({__amdb_br})自定义分隔符
+       msg: "({__amdb_delimited}) ({__amdb_br})
+        {{result.ansible_facts.ansible_processor_vcpus}} ({__amdb_br})
+        {{result.ansible_facts.ansible_processor_count}} ({__amdb_br})
+        {{result.ansible_facts.ansible_processor[2]}} ({__amdb_br})
+        {{result.ansible_facts.ansible_distribution}} ({__amdb_br})
+        {{result.ansible_facts.ansible_distribution_major_version}} ({__amdb_br})
+        {{result.ansible_facts.ansible_distribution_version}} ({__amdb_br})
+        {{result.ansible_facts.ansible_memtotal_mb}} ({__amdb_br})
+        {{result.ansible_facts.ansible_memory_mb.swap.total}} ({__amdb_br})
+        {{result.ansible_facts.ansible_uptime_seconds}} ({__amdb_br})
+        {{result.ansible_facts.ansible_all_ipv4_addresses[0]}} ({__amdb_br})
+        ({__amdb_delimited})" 

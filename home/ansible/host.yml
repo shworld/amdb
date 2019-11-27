@@ -1,0 +1,19 @@
+---
+- hosts: 127.0.0.1
+  vars:
+    #获取外部变量
+    g_ip: "{{ip}}"              #主机地址
+    g_name: "{{servername}}"    #主机名称
+    g_username: "{{username}}"  #登录用户
+    g_password: "{{password}}"  #登录密码
+    g_state: '{{state}}'        #present插入更新/absent删除
+
+  tasks:
+  - name: add host
+    lineinfile:
+       path: /etc/ansible/hosts
+       regexp: "{{g_ip}} servername"
+       line: "{{g_ip}} servername='{{g_name}}' ansible_ssh_user='{{g_username}}' ansible_ssh_pass='{{g_password}}'"
+       state: "{{g_state}}"        
+    #判断变量是否存在
+    when: g_ip,g_name,g_username,g_password,g_state is defined
