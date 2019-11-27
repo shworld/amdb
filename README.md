@@ -25,6 +25,9 @@ amdb硬件获取系统
 
 #### docker部署教程
 * 下载amdb_docker.7z
+* https://pan.baidu.com/s/1xMt7CS_lByhB5WjIBzDGlg
+* fh9l
+
 * 安装7z解压软件以及docker
   * yum install -y p7zip
   * yum install -y docker
